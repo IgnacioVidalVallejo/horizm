@@ -25,4 +25,26 @@ class WordController extends Controller
 
         return response()->json(['data' => $response]);
     }
+
+    public function post_word_counter($word,$post){
+
+        $title = explode(' ',$post->title);
+        $description = explode(' ',$post->body);
+
+        $times = 0;
+
+        for($i = 0; $i < count($title); $i++){
+            if($title[$i] == $word){
+                $times+=2;
+            }
+        }
+
+        for($i = 0; $i < count($description); $i++){
+            if($description[$i] == $word){
+                $times++;
+            }
+        }
+
+        return $times;
+    }
 }
